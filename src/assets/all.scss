@@ -1,0 +1,24 @@
+@import '~bootstrap/scss/_functions';
+@import './helps/variables';
+@import '~bootstrap/scss/bootstrap';
+
+// home
+  // slider
+  #slider{
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-top: 33.33333%;
+      .imgList{
+          position: absolute;
+      }
+  }
+
+  .u-padding-8{
+      padding-left: 8px;
+      padding-right: 8px;
+  }
+  .u-r-marging-8{
+    margin-left: -8px;
+    margin-right: -8px;
+  }
