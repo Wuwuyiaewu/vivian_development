@@ -17,7 +17,7 @@
                         <router-link class="nav-link" to="/about">About</router-link>
                     </li>
                     <li class="nav-item mr-4 col-2">
-                        <button class="nav-link border-0 bg-white" @click="foldcart">
+                        <button class="nav-link border-0 bg-white" @click="foldcart(msg)">
                             <font-awesome-icon icon="shopping-cart" class="text-primary "/>
                         </button>
                     </li>
@@ -47,6 +47,7 @@ export default {
             rwdshow:Boolean,
             clickshow:false,
             cartshow:true,
+            msg:''
         }
     },
     methods:{
@@ -54,10 +55,10 @@ export default {
             const vm = this
             vm.clickshow = false
         },
-        foldcart(){
+        foldcart(msg){
             const vm = this
             vm.$emit('cart-control')
-
+            vm.$bus.$emit('cartUpdate',msg)
         }
     },
     mounted () {

@@ -1,13 +1,18 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from "./router";
-
+// event bus
+import './bus'
+// event bus
 Vue.config.productionTip = false
 // axios
 import axios from "axios";
 import VueAxios from "vue-axios";
 Vue.use(VueAxios, axios);
 // axios
+// 讓 axios 傳送資料順帶cookies 才可以驗證
+axios.defaults.withCredentials = true;
+// 讓 axios 傳送資料順帶cookies 才可以驗證
 import "bootstrap";
 // swiper
 import "swiper/dist/css/swiper.css";
@@ -22,8 +27,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 library.add(fas);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 // fontawesome
-// 讓 axios 傳送資料順帶cookies 才可以驗證
-axios.defaults.withCredentials = true;
+
 
 new Vue({
   router,
