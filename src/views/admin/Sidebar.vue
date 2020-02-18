@@ -19,7 +19,7 @@
                     訂單列表</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link to="/admin/cupon" class="nav-link">
+                    <router-link to="/admin/coupon" class="nav-link">
                     <i class="fas fa-ticket-alt"></i>
                     優惠券</router-link>
                 </li>

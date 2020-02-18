@@ -23,7 +23,7 @@
                 <div class="w-100"></div>
             </section>
             <!-- swiper -->
-            <Swiper/>
+            <!-- <Swiper/> -->
             <!-- coupon -->
             <Coupon/>
             </div>
@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import Swiper from '../components/Swiper'
+// import Swiper from '../components/Swiper'
 import Coupon from '../components/Coupon'
 // @ is an alias to /src
 export default {
@@ -73,7 +73,7 @@ export default {
     }
   },
   components: {
-    Swiper,
+    // Swiper,
     Coupon,
   },
   methods:{

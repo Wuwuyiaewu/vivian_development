@@ -15,12 +15,15 @@
                 </div>
                 <div class="col-2">
                     <button class="btn p-0" @click="removeCart(item.id)">
-                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" class="svg-inline--fa fa-trash fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#FF6464" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" class="svg-inline--fa fa-trash fa-w-14 text-danger" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#FF6464" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
                     </button>
                 </div>
             </div>
             <div class="row mt-5">
-                <div class="col-12 text-right">
+                <div class="col-12" v-if="cartbag.length == 0">
+                    <p>you didn't have any items</p>
+                </div>
+                <div class="col-12 text-right" v-else>
                     <router-link class="btn btn-primary-dark" :to="{name:'checkout'}">check out</router-link>
                 </div>
             </div>
@@ -42,6 +45,10 @@
     &::-webkit-scrollbar {
         display: none;
     }
+    .fa-trash{
+        width: 16px;
+        height: 16px;
+    }
 }
 .active.navmenu{
     margin-left: 0px;
@@ -49,29 +56,20 @@
 </style>
 <script>
 export default {
-    props:['cart','cartlist'],
+    props:['cart','cartlist','cartbag'],
     data(){
         return{
             // props綁定響應只有一層? 無法傳遞到下一層響應?
             // cartshow:this.cart,
             cartshow:!this.cart,
-            cartbag:[]
         }
     },
     methods:{
-        getCart(){
-            const vm = this
-            const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_USERPATH}/cart`
-            vm.axios.get(url).then(res=>{
-                vm.cartbag = res.data.data.carts
-                console.log('內層事件的cartbag' + vm.cartbag)
-            })
-        },
         removeCart(id){
             const vm = this
             const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_USERPATH}/cart/${id}`
             vm.axios.delete(url).then(()=>{
-                vm.getCart()
+                this.$bus.$emit('cartUpdate')
             })
         },
         goCheck(){
@@ -82,7 +80,6 @@ export default {
         }
     },
     created(){
-        this.getCart()
     }
 }
 </script>

@@ -3,7 +3,7 @@
     <app-navbar class="sticky-top" :show="cartshow" @cart-control="parent_cartcontrol"/>
     <router-view class="animate pt-5" :class="{'push':cartfolder}"></router-view>
     <app-mask :cart='cartfolder'/>
-    <app-cart :cart='cartfolder'/>
+    <app-cart :cart='cartfolder' :cartbag="cartbag"/>
   </div>
 </template>
 
@@ -37,7 +37,7 @@ export default {
     return{
       cartshow:true,
       cartfolder:false,
-      cart:[]
+      cartbag:[]
     }
   },
   components: {
@@ -54,13 +54,17 @@ export default {
         const vm = this
         const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_USERPATH}/cart`
         vm.axios.get(url).then(res=>{
-            vm.cart = res.data.data
-            console.log(res)
+            vm.cartbag = res.data.data.carts
+            console.log('內層事件的cartbag' + vm.cartbag)
         })
     },
   },
   created(){
-    this.getCart()
+    this.$bus.$on('cartUpdate',()=>{
+      this.getCart()
+      console.log('觸發$bus的getCart')
+      console.log('外層事件的app cartbag',this.cartbag)
+    })
   }
 }
 </script>

@@ -58,46 +58,115 @@
                 </div>
             </div>
             <!-- 2頁 -->
-            <form class="row page-transition position-absolute w-100" :class="{'hild-left':!pagetwo}">
-                <div class="col-6">
-                    <div class="form-group">
-                        <label for="customName">Name</label>
-                        <input type="text" class="form-control" id="customName" v-model="form.user.name">
-                    </div>
-                    <div class="form-group">
-                        <label for="customEmail1">Email address</label>
-                        <input type="email" class="form-control" id="customEmail1" aria-describedby="emailHelp" v-model="form.user.email">
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Address</label>
-                        <input type="address" class="form-control" id="address" v-model="form.user.address">
-                    </div>
-                    <div class="form-group">
-                        <label for="customTel">Tel</label>
-                        <input type="tel" class="form-control" id="customTel" v-model="form.user.tel">
-                    </div>
+            <ValidationObserver ref="observer"  v-slot="{ invalid }" tag="form" >
+                <form class="row page-transition position-absolute" :class="{'hild-left':!pagetwo}" @submit.prevent="sendOrder">
+                <div class="form-group col-6">
+                    <label for="useremail">Email</label>
+                    <ValidationProvider name="email" rules="required|email" v-slot="{ errors }">
+                    <input
+                        type="email"
+                        class="form-control"
+                        name="email"
+                        id="useremail"
+                        v-model="form.user.email"
+                        placeholder="請輸入 Email"
+                        required
+                    />
+                    <span class="text-danger">{{ errors[0] }}</span>
+                    </ValidationProvider>
                 </div>
-                <div class="col-6">
-                    <label for="customTel">Message</label>
-                    <textarea class="form-control" id="customTel" placeholder="leave message here" v-model="form.message">
-                    </textarea>
+                <div class="form-group col-6">
+                    <label for="username">收件人姓名</label>
+                    <ValidationProvider v-slot="{ errors }" rules="required" name="姓名">
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="name"
+                        id="username"
+                        v-model="form.user.name"
+                        placeholder="輸入姓名"
+                    />
+                    <span class="text-danger">{{ errors[0] }}</span>
+                    </ValidationProvider>
                 </div>
-                <div class="col-6">
+
+                <div class="form-group col-6">
+                    <label for="usertel">收件人電話</label>
+                    <ValidationProvider v-slot="{ errors }" rules="required" name="電話">
+                    <input
+                        type="tel"
+                        class="form-control"
+                        id="usertel"
+                        v-model="form.user.tel"
+                        placeholder="請輸入電話"
+                    />
+                    <span class="text-danger">{{ errors[0] }}</span>
+                    </ValidationProvider>
+                </div>
+
+                <div class="form-group col-6">
+                    <label for="useraddress">收件人地址</label>
+                    <ValidationProvider v-slot="{ errors }" rules="required" name="地址">
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="address"
+                        id="useraddress"
+                        v-model="form.user.address"
+                        placeholder="請輸入地址"
+                    />
+                    <span class="text-danger">{{ errors[0] }}</span>
+                    </ValidationProvider>
+                </div>
+
+                <div class="form-group col-12">
+                    <label for="comment">留言</label>
+                    <textarea
+                    name
+                    id="comment"
+                    class="form-control"
+                    cols="30"
+                    rows="10"
+                    v-model="form.message"
+                    ></textarea>
+                </div>
+                <div class="text-right">
                     <button class="btn btn-primary-dark w-100" @click="pageone = !pageone,pagetwo = !pagetwo" type="button">上一步</button>
+                    <button class="btn btn-danger" :disabled="invalid">送出訂單</button>
                 </div>
-                <div class="col-6">
-                    <button type="submit" class="btn btn-primary-dark w-100" @click="pagetwo = !pagetwo,pagethree = !pagethree,sendOrder()">送出訂單</button>
-                </div>
-            </form>
+                </form>
+            </ValidationObserver>
             <!-- 3 頁 -->
-            <div class="row page-transition position-absolute" :class="{'hild-left':!pagethree}">
+            <!-- <div class="row page-transition position-absolute" :class="{'hild-left':!pagethree}">
+                <table class="table">
+                    <tr>
+                        <th>姓名</th>
+                        <td>{{form.name}}</td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td></td>
+                    </tr>
+                </table>
                 <div class="col-6">
                     <button class="btn btn-primary-dark w-100" @click="pagetwo = !pagetwo,pagethree = !pagethree" type="button">上一步</button>
                 </div>
                 <div class="col-12">
                     第三頁
                 </div>
-            </div>
+            </div> -->
         </div>
         <!-- 手機板 -->
         <!-- row 內綁定 v-for 會持續重複功能到下一個 dom 結束 -->
@@ -204,7 +273,9 @@ export default {
             console.log('click')
             let form = vm.form
             vm.axios.post(url,{data:form}).then(res=>{
-                console.log(res)
+                if(res.data.success){
+                    vm.$router.push(`customorder/${res.data.orderId}`)
+                }
             })
         }
     },

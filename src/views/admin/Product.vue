@@ -29,7 +29,7 @@
                     <td>
                         <button class="btn btn-outline-primary btn-sm" @click="openModal(false,item)">編輯</button>
                     </td>
-                    <td><button class="btn btn-outline-primary btn-sm">刪除</button></td>
+                    <td><button class="btn btn-outline-primary btn-sm" @click="delModal(item)">刪除</button ></td>
                 </tr>
             </tbody>
             

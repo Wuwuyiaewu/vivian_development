@@ -5,7 +5,9 @@ import Home from "../views/Home.vue";
 import Gallery from "../views/Gallery.vue";
 import Illustrator from "../views/Illustrator.vue"
 import Checkout from "../views/Checkout.vue"
+import Customorder from "../views/Customorder.vue";
 import Dashboard from "../views/admin/Dashboard.vue"
+import Coupon from "../views/admin/Coupon.vue";
 import Product from "../views/admin/Product.vue"
 import Order from "../views/admin/Order.vue"
 import Login from "../views/admin/Login.vue"
@@ -16,7 +18,7 @@ const routes = [
     path: "/",
     name: "Index",
     component: Index,
-    children:[
+    children: [
       {
         path: "/",
         name: "home",
@@ -30,14 +32,17 @@ const routes = [
       {
         path: "/checkout",
         name: "checkout",
-        component: Checkout,
-        props:true
+        component: Checkout
+      },
+      {
+        path: "/customorder/:orderId",
+        name: "customorder",
+        component: Customorder
       },
       {
         path: "/illustrator/:Illid",
         name: "illustrator",
-        component: Illustrator,
-        props: true
+        component: Illustrator
       },
       {
         path: "/about",
@@ -47,7 +52,7 @@ const routes = [
         // which is lazy-loaded when the route is visited.
         component: () =>
           import(/* webpackChunkName: "about" */ "../views/About.vue")
-      },
+      }
     ]
   },
   // 後台
@@ -55,7 +60,7 @@ const routes = [
     path: "/Admin",
     name: "dashboard",
     component: Dashboard,
-    children:[
+    children: [
       {
         path: "products",
         name: "products",
@@ -68,6 +73,12 @@ const routes = [
         component: Order,
         meta: { requiredUser: true }
       },
+      {
+        path: "coupon",
+        name: "coupon",
+        component: Coupon,
+        meta: { requiredUser: true }
+      }
     ]
   },
   {

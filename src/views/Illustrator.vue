@@ -1,11 +1,13 @@
 <template>
     <div>
         <div class="container border-primary-dark border">
-            <div class="row">
-                <div class="col-6 align-self-center justify-content-center">
-                    <img :src="product.image" alt="" class="img-fluid">
+            <div class="row ">
+                <div class="col-md-6 col-sm-12">
+                    <div class="img-contain">
+                        <img :src="product.image" alt="" class="img-fluid">
+                    </div>
                 </div>
-                <div class="col-6">
+                <div class="col-md-6 col-sm-12">
                     <p>夏日，飲著涼爽的咖啡拿鐵冰沙，既有
 甘醇苦味與鮮奶泡的致命感，配著一口
 一口的墜入心脾</p>
@@ -42,6 +44,10 @@
 .font-size{
     font-size: 1.5rem;
 }
+.img-contain{
+    display: flex;
+    width: 300px;
+}
 </style>
 
 <script>
@@ -64,7 +70,6 @@ export default {
             vm.axios.get(url).then(res=>{
                 vm.product = res.data.product
                 vm.product.num = 1
-                console.log(res)
             })
         },
         addToCart(id,qty){
@@ -74,8 +79,7 @@ export default {
                 product_id:`${id}`,
                 qty:`${qty}`
             }
-            vm.axios.post(url,{data:cart}).then(res=>{
-                console.log(res)
+            vm.axios.post(url,{data:cart}).then(()=>{
             })
         }
     },
