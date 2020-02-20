@@ -1,23 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from "./router";
-
+import ZoomOnHover from "vue-zoom-on-hover";
+Vue.use(ZoomOnHover);
 // validate
-// import { ValidationProvider, extend } from "vee-validate";
-// // validata ch
-// import { localize } from "vee-validate";
-// import TW from "vee-validate/dist/locale/zh_TW.json";
-
-// localize("zh_TW", TW);
-// // Register it globally
-// import { required, email } from "vee-validate/dist/rules";
-
-// // validata rule
-// extend("email",email);
-
-// extend("required",required);
-
-// wu validate
 // import 官方的元件 
 import {
   ValidationProvider,
@@ -60,20 +46,9 @@ import "bootstrap";
 // Vue.use(VueAwesomeSwiper /* { default global options } */);
 // swiper
 
-// fontawesome
-// import { library } from "@fortawesome/fontawesome-svg-core";
-// import { fas } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-// library.add(fas);
-// Vue.component("font-awesome-icon", FontAwesomeIcon);
-// fontawesome
-// validate
-
-
 
 
 new Vue({
-  // i18n,
   router,
   render: h => h(App)
 }).$mount("#app");

@@ -73,7 +73,6 @@ export default {
     }
   },
   components: {
-    // Swiper,
     Coupon,
   },
   methods:{

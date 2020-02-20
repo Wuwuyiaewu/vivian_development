@@ -21,16 +21,16 @@
                 <div class="col-9">
                     <div class="row">
                         <div class="col-xl-4 col-lg-6 mb-2" v-for="item in DreamFilter" :key="item.id">
-                            <div class="card bg-dark text-white">
+                            <div class="card bg-dark text-white web-card">
                             <img :src="item.image" class="card-img" alt="...">
-                            <div class="card-img-overlay card-pt">
+                            <div class="card-img-overlay card-pt ">
                                 <div class="row ">
                                     <div class="col-6 text-center">
-                                        <button class="btn btn-primary-dark" @click="addToCard(item.id)">
+                                        <button class="btn btn-primary-dark"  id="addcart" @click="addToCard(item.id)">
                                             Add to cart</button>
                                     </div>
                                     <div class="col-6 text-center">
-                                        <router-link class="btn btn-primary-dark" :to="{name:'illustrator',params:{Illid:item.id}}">See detail</router-link>
+                                        <router-link class="btn btn-primary-dark" id="seedetail" :to="{name:'illustrator',params:{Illid:item.id}}">See detail</router-link>
                                     </div>
                                 </div>
                             </div>
@@ -44,11 +44,42 @@
                     <pagination :page="pagination" @pagechange="getProduct" v-if="categoryType == 'all'"/>
                 </div>
             </div>
-            <div class="row d-sm-block d-md-none">
-                <div class="col-12 mb-2" v-for="item in products" :key="item.id">
+            <div class="row bg-primary-dark pb-1 pt-1 d-sm-block d-md-none">
+                <div class="col-12">
+                    <button class="btn btn-outline-secondary btn-black text-uppercase filter-btn m-2" @click="categoryType = 'all'" :class="{'active': categoryType == 'all'}">All story</button>
+                    <button class="btn btn-outline-secondary btn-black text-uppercase filter-btn m-2" @click="categoryType = 'sweet'" :class="{'active': categoryType == 'sweet'}">Sweet's story</button>
+                    <button class="btn btn-outline-secondary btn-black text-uppercase filter-btn m-2" @click="categoryType = 'love'" :class="{'active': categoryType == 'love'}">Love's story</button>
+                    <button class="btn btn-outline-secondary btn-black text-uppercase filter-btn m-2" @click="categoryType = 'natural'" :class="{'active': categoryType == 'natural'}">Natural's story</button>
+                </div>
+            </div>
+            <div class="row d-sm-block d-md-none pt-2">
+                <div class="col-12 mb-2" v-for="item in DreamFilter" :key="item.id">
                     <div class="card bg-dark text-white">
                             <img :src="item.image" class="card-img" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{item.title}}</h5>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button class="btn btn-primary-dark"  @click="addToCard(item.id)">
+                                        Add to cart</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <router-link class="btn btn-primary-dark"  :to="{name:'illustrator',params:{Illid:item.id}}">See detail</router-link>
+                                </div>
+                                </div>
+                            </div>
                     </div>
+                    <!-- <div class="card-img-overlay card-pt">
+                        <div class="row h-100 ">
+                            <div class="col-6 text-center">
+                                <button class="btn btn-primary-dark"  @click="addToCard(item.id)">
+                                    Add to cart</button>
+                            </div>
+                            <div class="col-6 text-center">
+                                <router-link class="btn btn-primary-dark"  :to="{name:'illustrator',params:{Illid:item.id}}">See detail</router-link>
+                            </div>
+                        </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -56,7 +87,37 @@
 </template>
 
 <style lang="scss" scoped>
-
+.card-img-overlay,.m_card-img-overlay{
+    overflow: hidden;
+    #addcart,#seedetail{
+        transition: transform 0.45s;
+        transform: translate(-100%,200%)
+    }
+    #seedetail{
+        transform: translate(100%,200%)
+    }
+    &:hover{
+        #addcart{
+            transform: translate(-10%,20%)
+        }
+        #seedetail{
+            transform: translate(10%,20%)
+        }
+    }
+}
+.web-card{
+    overflow: hidden;
+    .card-img{
+        transition-duration: 0.5s;
+        transition-property: transform;
+    }
+    &:hover{
+        .card-img{
+            transform: scale(1.2) rotate(5deg);
+            transition-duration: 8s;
+        }
+    }
+}
 
 @media (min-width: 768px) {
     .card-img-overlay{
@@ -89,6 +150,7 @@
         }
     }
 }
+
 </style>
 
 <script>

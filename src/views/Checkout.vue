@@ -40,9 +40,9 @@
                         <tfoot>
                             <td colspan="4">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="輸入折扣碼" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                    <input type="text" class="form-control" placeholder="輸入折扣碼" aria-label="Recipient's username" aria-describedby="button-addon2" v-model="coupon_code">
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">送出</button>
+                                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="addCouponCode">送出</button>
                                     </div>
                                 </div>
                             </td>
@@ -130,43 +130,15 @@
                     v-model="form.message"
                     ></textarea>
                 </div>
-                <div class="text-right">
+                <div class="col-6">
                     <button class="btn btn-primary-dark w-100" @click="pageone = !pageone,pagetwo = !pagetwo" type="button">上一步</button>
+                </div>
+                <div class="col-6 text-right">
                     <button class="btn btn-danger" :disabled="invalid">送出訂單</button>
                 </div>
                 </form>
             </ValidationObserver>
             <!-- 3 頁 -->
-            <!-- <div class="row page-transition position-absolute" :class="{'hild-left':!pagethree}">
-                <table class="table">
-                    <tr>
-                        <th>姓名</th>
-                        <td>{{form.name}}</td>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <td></td>
-                    </tr>
-                </table>
-                <div class="col-6">
-                    <button class="btn btn-primary-dark w-100" @click="pagetwo = !pagetwo,pagethree = !pagethree" type="button">上一步</button>
-                </div>
-                <div class="col-12">
-                    第三頁
-                </div>
-            </div> -->
         </div>
         <!-- 手機板 -->
         <!-- row 內綁定 v-for 會持續重複功能到下一個 dom 結束 -->
@@ -199,29 +171,83 @@
                     <p>NT. {{cartbag.total}} $</p>
                 </div>
             </div>
-            <form class="row">
-                <div class="form-group col-12">
-                    <label for="customName">Name</label>
-                    <input type="text" class="form-control" id="customName" v-model="form.user.name">
+            <ValidationObserver ref="observer"  v-slot="{ invalid }" tag="form" >
+                <form class="row" @submit.prevent="sendOrder">
+                <div class="form-group col-6">
+                    <label for="useremail">Email</label>
+                    <ValidationProvider name="email" rules="required|email" v-slot="{ errors }">
+                    <input
+                        type="email"
+                        class="form-control"
+                        name="email"
+                        id="useremail"
+                        v-model="form.user.email"
+                        placeholder="請輸入 Email"
+                        required
+                    />
+                    <span class="text-danger">{{ errors[0] }}</span>
+                    </ValidationProvider>
                 </div>
-                <div class="form-group col-12">
-                    <label for="customEmail1">Email address</label>
-                    <input type="email" class="form-control" id="customEmail1" aria-describedby="emailHelp" v-model="form.user.email">
+                <div class="form-group col-6">
+                    <label for="m_username">收件人姓名</label>
+                    <ValidationProvider v-slot="{ errors }" rules="required" name="姓名">
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="name"
+                        id="m_username"
+                        v-model="form.user.name"
+                        placeholder="輸入姓名"
+                    />
+                    <span class="text-danger">{{ errors[0] }}</span>
+                    </ValidationProvider>
                 </div>
-                <div class="form-group col-12">
-                    <label for="address">Address</label>
-                    <input type="address" class="form-control" id="address" v-model="form.user.address">
+
+                <div class="form-group col-6">
+                    <label for="m_usertel">收件人電話</label>
+                    <ValidationProvider v-slot="{ errors }" rules="required" name="電話">
+                    <input
+                        type="tel"
+                        class="form-control"
+                        id="m_usertel"
+                        v-model="form.user.tel"
+                        placeholder="請輸入電話"
+                    />
+                    <span class="text-danger">{{ errors[0] }}</span>
+                    </ValidationProvider>
                 </div>
-                <div class="form-group col-12">
-                    <label for="customTel">Tel</label>
-                    <input type="tel" class="form-control" id="customTel" v-model="form.user.tel">
+
+                <div class="form-group col-6">
+                    <label for="m_useraddress">收件人地址</label>
+                    <ValidationProvider v-slot="{ errors }" rules="required" name="地址">
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="address"
+                        id="m_useraddress"
+                        v-model="form.user.address"
+                        placeholder="請輸入地址"
+                    />
+                    <span class="text-danger">{{ errors[0] }}</span>
+                    </ValidationProvider>
                 </div>
+
                 <div class="form-group col-12">
-                    <label for="customTel">Message</label>
-                    <textarea class="form-control" id="customTel" placeholder="leave message here" v-model="form.message">
-                    </textarea>
+                    <label for="m_comment">留言</label>
+                    <textarea
+                    name
+                    id="m_comment"
+                    class="form-control"
+                    cols="30"
+                    rows="10"
+                    v-model="form.message"
+                    ></textarea>
                 </div>
-            </form>
+                <div class="col-12 text-right">
+                    <button class="btn btn-danger" :disabled="invalid">送出訂單</button>
+                </div>
+                </form>
+            </ValidationObserver>
         </div>
         </div>
 </template>
@@ -244,6 +270,7 @@ export default {
             pageone:true,
             pagetwo:false,
             pagethree:false,
+            coupon_code:'',
             form:{
                 user:{
                     name:'',
@@ -265,6 +292,18 @@ export default {
             vm.axios.get(url).then(res=>{
                 vm.cartbag = res.data.data
                 console.log(res)
+            })
+        },
+        addCouponCode(){
+            const vm = this
+            const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_USERPATH}/coupon`
+            const coupon = {
+                code : vm.coupon_code
+            }
+            vm.axios.post(url,{data:coupon}).then(res=>{
+                console.log(res.data)
+                vm.getCart()
+                // vm.isLoading = false
             })
         },
         sendOrder(){

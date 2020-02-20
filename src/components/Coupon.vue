@@ -1,35 +1,77 @@
 <template>
     <div>
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <p class="text-se text-center">輸入信箱取得最新作品資訊與優惠碼</p>
-                </div>
-                <div class="col-12">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="請輸入信箱" aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary bg-secondary-dark text-white" type="button" id="button-addon2">送出</button>
+            <ValidationObserver ref="observer"  v-slot="{ invalid }" tag="form">
+                <form class="row mt-5" @submit.prevent="emails">
+                    <div class="col-12">
+                        <p class="text-center">輸入信箱取得最新作品資訊與優惠碼</p>
+                    </div>
+                    <ValidationProvider name="email" rules="required|email" v-slot="{ errors }" class="col-md-6 col-sm-12 mb-4">
+                        <div class="input-group">
+                        <input
+                            type="email"
+                            class="form-control"
+                            name="email"
+                            v-model="typeEmail"
+                            placeholder="請輸入 Email"
+                            required
+                        />
+                        <div class="text-right input-group-append">
+                            <button class="btn btn-outline-secondary bg-secondary-dark text-white" :disabled="invalid">送出</button>
+                        </div>
+                        <br>
+                        <span class="text-danger position-absolute validate-error">{{ errors[0] }}</span>
+                        </div>
+                    </ValidationProvider>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="couponText" v-model="couponText">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="copyTestingCode">複製</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="button-addon2">複製</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </form>
+            </ValidationObserver>
         </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
-.text-se{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 18px;
-    font-weight: 900;
+.validate-error{
+    transform: translate(0,60px);
 }
 </style>
+
+<script>
+export default {
+    data(){
+        return{
+            typeEmail:"",
+            couponText:null,
+            form:{
+                user:{
+                    email:'',
+                }
+            }
+        }
+    },
+    methods:{
+        emails(){
+            this.couponText = 'Vivian_illustrator'
+        },
+        copyTestingCode(){
+            let testingCodeToCopy = document.querySelector('#couponText')
+            testingCodeToCopy.setAttribute('type', 'text')    // 不是 hidden 才能複製
+            testingCodeToCopy.select()
+            try {
+                var successful = document.execCommand('copy');
+                var msg = successful ? 'successful' : 'unsuccessful';
+                alert('複製成功' + msg);
+            } catch (err) {
+                alert('複製失敗');
+            }
+        }
+    }
+}
+</script>
