@@ -56,11 +56,9 @@
 </style>
 <script>
 export default {
-    props:['cart','cartlist','cartbag'],
+    props:['cart','cartbag'],
     data(){
         return{
-            // props綁定響應只有一層? 無法傳遞到下一層響應?
-            // cartshow:this.cart,
             cartshow:!this.cart,
         }
     },

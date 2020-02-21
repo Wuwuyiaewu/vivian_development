@@ -62,8 +62,6 @@ export default {
   created(){
     this.$bus.$on('cartUpdate',()=>{
       this.getCart()
-      console.log('觸發$bus的getCart')
-      console.log('外層事件的app cartbag',this.cartbag)
     })
   }
 }

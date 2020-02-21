@@ -1,6 +1,14 @@
 <template>
     <div>
+        <loading :active.sync="isLoading"></loading>
+        <Alert></Alert>
         <div class="container">
+            <nav aria-label="breadcrumb" class="row">
+                <ol class="breadcrumb col-12">
+                    <router-link to="/" class="breadcrumb-item breadcrumb-link">首頁</router-link>
+                    <li class="breadcrumb-item active" aria-current="page">畫廊</li>
+                </ol>
+            </nav>
             <div class="row d-none d-sm-none d-md-flex">
                 <div class="col-3">
                     <div class="row bg-primary-dark pb-1 pt-1">
@@ -8,7 +16,7 @@
                             <button class="btn btn-primary-light w-100 text-left" @click="categoryType = 'all'" :class="{'active': categoryType == 'all'}">All story</button>
                         </div>
                         <div class="col-12 pb-1 pt-1">
-                            <button class="btn btn-primary-light w-100 text-left" @click="categoryType = 'sweet'" :class="{'active': categoryType == 'sweet'}">Sweet story</button>
+                            <button class="btn btn-primary-light w-100 text-left" @click="categoryType = 'sweet'" :class="{'active': categoryType == 'sweet'}">Sweet's story</button>
                         </div>
                         <div class="col-12 pb-1 pt-1">
                             <button class="btn btn-primary-light w-100 text-left" @click="categoryType = 'love'" :class="{'active': categoryType == 'love'}">Love's story</button>
@@ -44,8 +52,11 @@
                     <pagination :page="pagination" @pagechange="getProduct" v-if="categoryType == 'all'"/>
                 </div>
             </div>
-            <div class="row bg-primary-dark pb-1 pt-1 d-sm-block d-md-none">
-                <div class="col-12">
+            <div class="row d-sm-flex d-md-none">
+                <back-to-top bottom="50px" right="50px">
+                    <button type="button" class="btn btn-secondary-dark btn-to-top">↑</button>
+                </back-to-top>
+                <div class="col-12 bg-primary-light">
                     <button class="btn btn-outline-secondary btn-black text-uppercase filter-btn m-2" @click="categoryType = 'all'" :class="{'active': categoryType == 'all'}">All story</button>
                     <button class="btn btn-outline-secondary btn-black text-uppercase filter-btn m-2" @click="categoryType = 'sweet'" :class="{'active': categoryType == 'sweet'}">Sweet's story</button>
                     <button class="btn btn-outline-secondary btn-black text-uppercase filter-btn m-2" @click="categoryType = 'love'" :class="{'active': categoryType == 'love'}">Love's story</button>
@@ -69,17 +80,6 @@
                                 </div>
                             </div>
                     </div>
-                    <!-- <div class="card-img-overlay card-pt">
-                        <div class="row h-100 ">
-                            <div class="col-6 text-center">
-                                <button class="btn btn-primary-dark"  @click="addToCard(item.id)">
-                                    Add to cart</button>
-                            </div>
-                            <div class="col-6 text-center">
-                                <router-link class="btn btn-primary-dark"  :to="{name:'illustrator',params:{Illid:item.id}}">See detail</router-link>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -118,7 +118,15 @@
         }
     }
 }
-
+.btn-to-top {
+    width: 50px;
+    height: 50px;
+    padding: 10px 16px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: 900;
+    line-height: 1rem;
+}
 @media (min-width: 768px) {
     .card-img-overlay{
         padding-top: 55%;
@@ -155,7 +163,6 @@
 
 <script>
 import pagination from '../components/Pagination'
-
 export default {
     data(){
         return{
@@ -164,6 +171,7 @@ export default {
             cartbag:[],
             categoryType:"all",
             pagination:{},
+            isLoading:false,
         }
     },
     components:{
@@ -183,21 +191,35 @@ export default {
         }
     },
     methods:{
+        // 頁碼版
         getProduct(page = 1){
             const vm = this
             const API = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_USERPATH}/products?page=${page}`
+            // 啟動loading
+            vm.isLoading = true
             vm.axios.get(API).then(res=>{
+                // 取得頁數products
                 vm.products = res.data.products
+                // 賦予分頁
                 vm.pagination = res.data.pagination
+                // 關閉loading
+                vm.isLoading = false
             })
         },
+        // 全部商品(分類版)
         typeProduct(){
             const vm = this
             const API = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_USERPATH}/products/all`
+            // 啟動loading
+            vm.isLoading = true
             vm.axios.get(API).then(res=>{
                 vm.product = res.data.products
+                // 關閉loading
+                vm.isLoading = false
+
             })
         },
+        // 新增至購物車
         addToCard(id,qty=1){
             const vm = this
             const API = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_USERPATH}/cart`
@@ -205,17 +227,19 @@ export default {
                 product_id:id,
                 qty
             }
-            vm.axios.post(API,{data:cart}).then(()=>{
-                vm.getCart()
+            // 啟動loading
+            vm.isLoading = true
+            vm.axios.post(API,{data:cart}).then(res=>{
+                if(res.data.success){
+                    // 觸發購物車更新
+                    this.$bus.$emit('cartUpdate')
+                    vm.$bus.$emit('message:push','加入成功','success');
+                    vm.isLoading = false
+                }else{
+                    vm.$bus.$emit('message:push','加入失敗','warning');
+                }
             })
-        },
-        getCart(){
-            const vm = this
-            const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_USERPATH}/cart`
-            vm.axios.get(url).then(res=>{
-                vm.cartbag = res.data.data.carts
-            })
-        },
+        }
     },
     created(){
         this.getProduct()

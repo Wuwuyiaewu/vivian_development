@@ -17,9 +17,14 @@
                         </thead>
                         <tbody class="bg-primary-light" v-for="item in cartbag.carts" :key="item.product.id">
                         <td><img :src="item.product.image" class="img-fluid" alt=""></td>
-                        <td>{{item.product.title}}</td> 
-                        <td>{{item.qty}}</td>
-                        <td>{{item.product.price}}</td>
+                        <td>{{item.product.title}}
+                            <div v-if="item.coupon" class="text-secondary-dark">
+                                已套用優惠
+                            </div>
+                        </td> 
+                        <td>{{item.qty}} / pic</td>
+                        <td>{{item.product.price | currency}}
+                        </td>
                         </tbody>
                         <tfoot>
                         
@@ -29,12 +34,14 @@
                 <div class="col-5 ">
                     <table class="table">
                         <thead>
-                            <th>小計</th>
-                            <th>總計</th>
+                            <th colspan="2">總計</th>
                         </thead>
                         <tbody>
-                            <td>{{cartbag.total}} $</td>
-                            <td>{{cartbag.final_total}} $</td>
+                            <td v-if="cartbag.final_total == cartbag.total">{{cartbag.total | currency}} 元</td>
+                            <td v-if="cartbag.final_total !== cartbag.total" class="text-danger"><del>{{cartbag.total | currency}}</del>
+                            <div v-if="cartbag.carts.coupon">優惠折扣</div>
+                            </td>
+                            <td v-if="cartbag.final_total !== cartbag.total">{{cartbag.final_total | currency}} 元</td>
                             
                         </tbody>
                         <tfoot>
@@ -61,7 +68,7 @@
             <ValidationObserver ref="observer"  v-slot="{ invalid }" tag="form" >
                 <form class="row page-transition position-absolute" :class="{'hild-left':!pagetwo}" @submit.prevent="sendOrder">
                 <div class="form-group col-6">
-                    <label for="useremail">Email</label>
+                    <label for="useremail">Email *</label>
                     <ValidationProvider name="email" rules="required|email" v-slot="{ errors }">
                     <input
                         type="email"
@@ -76,7 +83,7 @@
                     </ValidationProvider>
                 </div>
                 <div class="form-group col-6">
-                    <label for="username">收件人姓名</label>
+                    <label for="username">收件人姓名 *</label>
                     <ValidationProvider v-slot="{ errors }" rules="required" name="姓名">
                     <input
                         type="text"
@@ -91,7 +98,7 @@
                 </div>
 
                 <div class="form-group col-6">
-                    <label for="usertel">收件人電話</label>
+                    <label for="usertel">收件人電話 *</label>
                     <ValidationProvider v-slot="{ errors }" rules="required" name="電話">
                     <input
                         type="tel"
@@ -105,7 +112,7 @@
                 </div>
 
                 <div class="form-group col-6">
-                    <label for="useraddress">收件人地址</label>
+                    <label for="useraddress">收件人地址 *</label>
                     <ValidationProvider v-slot="{ errors }" rules="required" name="地址">
                     <input
                         type="text"
@@ -141,18 +148,16 @@
             <!-- 3 頁 -->
         </div>
         <!-- 手機板 -->
-        <!-- row 內綁定 v-for 會持續重複功能到下一個 dom 結束 -->
-        <!-- 因此搭配 relative 與 absolute 會不適合有兩個以上區塊 -->
-        <!-- 使用 transform 會有困難 -->
         <div class="container mobile d-sm-block d-md-none">
             <div class="row " v-for="item in cartbag.carts" :key="item.product.id">
                 <div class="col-6">
                     <img :src="item.product.image" alt="" class="img-fluid">
                 </div>
                 <div class="col-6">
-                    <p>{{item.product.title}}</p>
-                    <p>{{item.product.price}} $ * {{item.qty}} {{item.product.unit}}</p>
-                    <p>{{item.final_total}} $</p>
+                    <p>{{item.product.title}} 
+                    </p>
+                    <p>{{item.product.price}} * {{item.qty}} {{item.product.unit}}</p>
+                    <p>{{item.final_total | currency}} <span v-if="item.coupon" class="text-secondary-dark">已套用優惠</span></p>
                 </div>
             </div>
             <div class="row">
@@ -168,19 +173,19 @@
                     應付金額
                 </div>
                 <div class="col-6">
-                    <p>NT. {{cartbag.total}} $</p>
+                    <p>{{cartbag.final_total | currency}} 元</p>
                 </div>
             </div>
             <ValidationObserver ref="observer"  v-slot="{ invalid }" tag="form" >
                 <form class="row" @submit.prevent="sendOrder">
                 <div class="form-group col-6">
-                    <label for="useremail">Email</label>
+                    <label for="m_useremail">Email *</label>
                     <ValidationProvider name="email" rules="required|email" v-slot="{ errors }">
                     <input
                         type="email"
                         class="form-control"
                         name="email"
-                        id="useremail"
+                        id="m_useremail"
                         v-model="form.user.email"
                         placeholder="請輸入 Email"
                         required
@@ -189,7 +194,7 @@
                     </ValidationProvider>
                 </div>
                 <div class="form-group col-6">
-                    <label for="m_username">收件人姓名</label>
+                    <label for="m_username">收件人姓名 *</label>
                     <ValidationProvider v-slot="{ errors }" rules="required" name="姓名">
                     <input
                         type="text"
@@ -204,7 +209,7 @@
                 </div>
 
                 <div class="form-group col-6">
-                    <label for="m_usertel">收件人電話</label>
+                    <label for="m_usertel">收件人電話 *</label>
                     <ValidationProvider v-slot="{ errors }" rules="required" name="電話">
                     <input
                         type="tel"
@@ -218,7 +223,7 @@
                 </div>
 
                 <div class="form-group col-6">
-                    <label for="m_useraddress">收件人地址</label>
+                    <label for="m_useraddress">收件人地址 *</label>
                     <ValidationProvider v-slot="{ errors }" rules="required" name="地址">
                     <input
                         type="text"

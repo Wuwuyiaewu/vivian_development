@@ -1,8 +1,26 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from "./router";
+// alert
+import Alert from "./components/Alert.vue";
+Vue.component("Alert", Alert);
+// zoom
 import ZoomOnHover from "vue-zoom-on-hover";
 Vue.use(ZoomOnHover);
+// zoom
+// backtotop
+import BackToTop from "vue-backtotop";
+Vue.use(BackToTop);
+// backtotop
+// loading
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+Vue.component("Loading", Loading)
+// loading
+// currencyfilter
+import FilterPrice from './DataFilter/currencyFilter'
+Vue.filter('currency', FilterPrice)
+// currencyfilter
 // validate
 // import 官方的元件 
 import {
@@ -24,7 +42,6 @@ Object.keys(rules).forEach(rule => {
 });
 Vue.component("ValidationProvider", ValidationProvider);
 Vue.component("ValidationObserver", ValidationObserver);
-
 
 
 // event bus

@@ -1,7 +1,7 @@
 <template>
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-            <div class="sidebar-sticky">
-                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar ">
+            <div class="sidebar-sticky ">
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mb-1 text-muted ">
                 <span>管理者</span>
                 <a class="d-flex align-items-center text-muted" href="#">
                     <span data-feather="plus-circle"></span>
@@ -22,18 +22,6 @@
                     <router-link to="/admin/coupon" class="nav-link">
                     <i class="fas fa-ticket-alt"></i>
                     優惠券</router-link>
-                </li>
-                </ul>
-                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span>使用者</span>
-                <a class="d-flex align-items-center text-muted" href="#">
-                    <span data-feather="plus-circle"></span>
-                </a>
-                </h6>
-                <ul class="nav flex-column mb-2">
-                <li class="nav-item">
-                    <router-link to="/coustomer_order" class="nav-link">
-                    模擬訂單</router-link>
                 </li>
                 </ul>
             </div>

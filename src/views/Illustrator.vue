@@ -1,5 +1,16 @@
 <template>
     <div>
+        <loading :active.sync="isLoading"></loading>
+        <Alert></Alert>
+        <div class="container">
+            <nav aria-label="breadcrumb" class="row">
+                <ol class="breadcrumb col-12">
+                    <router-link to="/" class="breadcrumb-item breadcrumb-link">首頁</router-link>
+                    <router-link to="/gallery" class="breadcrumb-item breadcrumb-link">畫廊</router-link>
+                    <li class="breadcrumb-item active" aria-current="page">作品</li>
+                </ol>
+            </nav>
+        </div>
         <div class="container border-primary-dark border">
             <div class="row">
                 <div class="col-md-6 col-sm-12 p-3">
@@ -7,17 +18,30 @@
                 </div>
                 <div class="col-md-6 col-sm-12 p-3">
                     <h6>畫名</h6>
-                    <p>{{product.description}}</p>
-                    <div>
-                        <button v-if="productNum > 1" @click="changeNum(-1)">
-                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-left" class="svg-inline--fa btn-primary-light fa-angle-left fa-w-8" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path fill="currentColor" d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"></path></svg>
-                        </button>
-                        <input type="text" :value="productNum">
-                        <button @click="changeNum(1)">
-                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" class="btn btn-primary-light svg-inline--fa fa-angle-right fa-w-8 p-0" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg>
-                        </button>
+                    <p><strong>{{product.description}}</strong></p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi quos id sapiente consequatur? Quas cum possimus voluptates enim sapiente ex sequi nisi maxime a aliquid illo aperiam, tenetur esse alias magni voluptate magnam beatae! Eum, nesciunt veritatis porro earum vel in placeat fugit voluptate iste atque cum aut saepe quam.</p>
+                    <div class="row align-items-center">
+                        <div class="col-6 text-center">
+                            <p class="font-size">數量 -</p>
+                        </div>
+                        <div class="col-6">
+                            <p>
+                                <button @click="changeNum(-1)" class="productControl" :class="{'show':buttonShow}">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-left" class="svg-inline--fa btn-primary-light fa-angle-left fa-w-8" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path fill="currentColor" d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"></path></svg>
+                                </button>
+                                <input type="text" :value="productNum" class="productText">
+                                <button @click="changeNum(1)" class="productControl">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" class="btn btn-primary-light svg-inline--fa fa-angle-right fa-w-8 p-0" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg>
+                                </button>
+                            </p>
+                        </div>
+                        <div class="col-6 text-center">
+                            <p class="font-size">價格 -</p> 
+                        </div>
+                        <div class="col-6 text-left">
+                           <p class="font-size">{{(productNum * product.price) | currency}}</p>
+                        </div>
                     </div>
-                    <p class="font-size">NT {{productNum * product.price}} $</p>
                     <div class="row">
                         <div class="col-6">
                             <button type="submit" class="btn btn-primary-dark" @click="addToCart(product.id,productNum)">加入購物車</button>
@@ -50,6 +74,26 @@
 .zoom:hover{
     cursor: crosshair;
 }
+.productText{
+    padding: 5px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    width: 60px;
+    margin: 0 15px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+}
+.productControl{
+    vertical-align: top;
+    border: 0;
+    border-radius: 4px;
+    padding: 0;
+}
+.show{
+    opacity: 0;
+    visibility: hidden;
+}
 </style>
 
 <script>
@@ -60,9 +104,17 @@ export default {
             id:'',
             cart:[],
             productNum:1,
+            isLoading:false,
         }
     },
-    components:{
+    computed:{
+        buttonShow(){
+            if(this.productNum < 2){
+                return true
+            }else{
+                return false
+            }
+        }
     },
     methods:{
         idDetect(){
@@ -87,7 +139,13 @@ export default {
                 product_id:`${id}`,
                 qty:`${qty}`
             }
-            vm.axios.post(url,{data:cart}).then(()=>{
+            vm.isLoading = true
+            vm.axios.post(url,{data:cart}).then(res=>{
+                if(res.data.success){
+                    vm.$bus.$emit('message:push','加入成功','success');
+                    this.$bus.$emit('cartUpdate')
+                    vm.isLoading = false
+                }
             })
         },
         addToCart_checkout(id,qty){
@@ -97,15 +155,11 @@ export default {
                 product_id:`${id}`,
                 qty:`${qty}`
             }
-            vm.axios.post(url,{data:cart}).then(()=>{
-            })
-            // sendOrder
-            url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_USERPATH}/order`
-            console.log('click')
-            let form = vm.form
-            vm.axios.post(url,{data:form}).then(res=>{
+            vm.axios.post(url,{data:cart}).then(res=>{
                 if(res.data.success){
-                    vm.$router.push(`customorder/${res.data.orderId}`)
+                    this.$bus.$emit('cartUpdate')
+                    vm.$router.push(`/checkout`)
+
                 }
             })
         }
