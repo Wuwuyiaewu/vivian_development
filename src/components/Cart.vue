@@ -66,8 +66,10 @@ export default {
         removeCart(id){
             const vm = this
             const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_USERPATH}/cart/${id}`
-            vm.axios.delete(url).then(()=>{
-                this.$bus.$emit('cartUpdate')
+            vm.axios.delete(url).then((res)=>{
+                if(res.data.success){
+                    this.$bus.$emit('cartUpdate')
+                }
             })
         },
         goCheck(){

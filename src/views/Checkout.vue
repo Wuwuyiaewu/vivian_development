@@ -2,12 +2,15 @@
     <div>
         <div class="container pc d-none d-sm-none d-md-block position-relative">
             <div class="row">
-                <div class="col-12">
-                    <p>結帳流程1</p>
-                </div>
+                <ul class="list col-12 pb-3">
+                    <li :class="{'active':pageone}">確認購物車</li>
+                    <li :class="{'active':pagetwo}">客戶資訊</li>
+                    <li >付款確認</li>
+                </ul>
             </div>
             <div class="row page-transition position-absolute" :class="{'hild-left':!pageone}">
-                <div class="col-7">
+                <div class="col-7" v-if="cartbag.carts.length == 0 ">購物車內還沒有商品唷</div>
+                <div class="col-7" v-if="cartbag.carts.length !== 0 ">
                     <table class="table">
                         <thead class="bg-primary text-white">
                             <th width=100></th>
@@ -27,7 +30,6 @@
                         </td>
                         </tbody>
                         <tfoot>
-                        
                         </tfoot>
                     </table>
                 </div>
@@ -163,9 +165,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="輸入折扣碼" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <input type="text" class="form-control" placeholder="輸入折扣碼" aria-label="Recipient's username" aria-describedby="button-addon2" v-model="coupon_code">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="button-addon2">送出</button>
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="addCouponCode">送出</button>
                         </div>
                     </div>
                 </div>
@@ -265,6 +267,7 @@
 .page-transition{
     transition: all 0.3s;
 }
+
 </style>
 
 <script>
@@ -285,6 +288,7 @@ export default {
                 },
                 message:'',
             },
+            isLoading:false,
 
         }
     },
@@ -296,7 +300,6 @@ export default {
             const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_USERPATH}/cart`
             vm.axios.get(url).then(res=>{
                 vm.cartbag = res.data.data
-                console.log(res)
             })
         },
         addCouponCode(){
@@ -305,10 +308,15 @@ export default {
             const coupon = {
                 code : vm.coupon_code
             }
+            vm.isLoading = true
             vm.axios.post(url,{data:coupon}).then(res=>{
-                console.log(res.data)
-                vm.getCart()
-                // vm.isLoading = false
+                if(res.data.success){
+                    vm.$bus.$emit('message:push',res.data.message,'success');
+                    vm.getCart()
+                    vm.isLoading = false
+                }else{
+                    vm.$bus.$emit('message:push',res.data.message,'wraning');
+                }
             })
         },
         sendOrder(){

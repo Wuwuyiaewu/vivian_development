@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-navbar class="sticky-top" :show="cartshow" @cart-control="parent_cartcontrol"/>
+    <app-navbar class="sticky-top" :cartbag="cartbag" :show="cartshow" @cart-control="parent_cartcontrol"/>
     <router-view class="animate pt-5" :class="{'push':cartfolder}"></router-view>
     <app-mask :cart='cartfolder'/>
     <app-cart :cart='cartfolder' :cartbag="cartbag"/>
@@ -55,9 +55,11 @@ export default {
         const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_USERPATH}/cart`
         vm.axios.get(url).then(res=>{
             vm.cartbag = res.data.data.carts
-            console.log('內層事件的cartbag' + vm.cartbag)
+            console.log(vm.cartbag.length)
         })
     },
+    getCartLength(){
+    }
   },
   created(){
     this.$bus.$on('cartUpdate',()=>{

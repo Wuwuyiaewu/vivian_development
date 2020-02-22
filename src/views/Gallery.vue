@@ -168,7 +168,6 @@ export default {
         return{
             products:[],
             product:[],
-            cartbag:[],
             categoryType:"all",
             pagination:{},
             isLoading:false,
