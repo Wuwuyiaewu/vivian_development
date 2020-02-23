@@ -21,7 +21,7 @@
             </div>
             <div class="row mt-5">
                 <div class="col-12" v-if="cartbag.length == 0">
-                    <p>you didn't have any items</p>
+                    <p>購物車內目前沒有商品</p>
                 </div>
                 <div class="col-12 text-right" v-else>
                     <router-link class="btn btn-primary-dark" :to="{name:'checkout'}">check out</router-link>
@@ -45,10 +45,10 @@
     &::-webkit-scrollbar {
         display: none;
     }
-    .fa-trash{
-        width: 16px;
-        height: 16px;
-    }
+    // .fa-trash{
+    //     width: 16px;
+    //     height: 16px;
+    // }
 }
 .active.navmenu{
     margin-left: 0px;

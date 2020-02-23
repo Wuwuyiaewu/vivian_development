@@ -22,10 +22,10 @@
             <section class="w-100 home_bg_1">
                 <div class="w-100"></div>
             </section>
-            <!-- swiper -->
-            <!-- <Swiper/> -->
-            <!-- coupon -->
             <Coupon/>
+
+            
+            <!-- coupon -->
             </div>
             <div class="home d-sm-block d-md-none">
             <div class="container">
@@ -59,6 +59,12 @@
             <!-- coupon -->
             <Coupon/>
         </div>
+        <footer class="footer mt-auto py-3 bg-primary-light">
+            <div class="container">
+                <span class="text-muted">@2020 CopyRight
+        本站僅作品練習，圖資來源為個人創作，如需使用請聯繫作者</span>
+            </div>
+        </footer>
     </div>
 </template>
 
@@ -71,6 +77,9 @@ export default {
   data(){
     return{
     }
+  },
+  computed:{
+    
   },
   components: {
     Coupon,

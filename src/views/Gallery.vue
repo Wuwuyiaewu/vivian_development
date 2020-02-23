@@ -76,13 +76,19 @@
                                     </div>
                                     <div class="col-6">
                                         <router-link class="btn btn-primary-dark"  :to="{name:'illustrator',params:{Illid:item.id}}">See detail</router-link>
-                                </div>
+                                    </div>
                                 </div>
                             </div>
                     </div>
                 </div>
             </div>
         </div>
+        <footer class="footer mt-auto py-3 bg-primary-light">
+            <div class="container">
+                <span class="text-muted">@2020 CopyRight
+        本站僅作品練習，圖資來源為個人創作，如需使用請聯繫作者</span>
+            </div>
+        </footer>
     </div>
 </template>
 
@@ -232,7 +238,7 @@ export default {
                 if(res.data.success){
                     // 觸發購物車更新
                     this.$bus.$emit('cartUpdate')
-                    vm.$bus.$emit('message:push','加入成功','success');
+                    vm.$bus.$emit('message:push','加入成功','primary-dark');
                     vm.isLoading = false
                 }else{
                     vm.$bus.$emit('message:push','加入失敗','warning');

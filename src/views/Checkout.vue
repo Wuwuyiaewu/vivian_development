@@ -59,8 +59,11 @@
                     </table>
                     <table class="table">
                         <thead>
-                            <td>
+                            <td v-if="cartbag.carts.length !== 0">
                                 <button type="button" class="btn btn-primary-dark w-100" @click="pageone = !pageone,pagetwo = !pagetwo">下一步</button>
+                            </td>
+                            <td v-if="cartbag.carts.length == 0">
+                                <button type="button" class="btn btn-primary-dark w-100" @click="pageone = !pageone,pagetwo = !pagetwo" disabled>下一步</button>
                             </td>
                         </thead>
                     </table>
@@ -155,11 +158,16 @@
                 <div class="col-6">
                     <img :src="item.product.image" alt="" class="img-fluid">
                 </div>
-                <div class="col-6">
+                <div class="col-5">
                     <p>{{item.product.title}} 
                     </p>
                     <p>{{item.product.price}} * {{item.qty}} {{item.product.unit}}</p>
                     <p>{{item.final_total | currency}} <span v-if="item.coupon" class="text-secondary-dark">已套用優惠</span></p>
+                </div>
+                <div class="col-1">
+                    <button class="btn p-0" @click="removeCart(item.id)">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" class="svg-inline--fa fa-trash fa-w-14 text-danger" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#FF6464" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
+                    </button>
                 </div>
             </div>
             <div class="row">
@@ -295,6 +303,15 @@ export default {
     computed:{
     },
     methods:{
+        removeCart(id){
+            const vm = this
+            const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_USERPATH}/cart/${id}`
+            vm.axios.delete(url).then((res)=>{
+                if(res.data.success){
+                    vm.getCart()
+                }
+            })
+        },
         getCart(){
             const vm = this
             const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_USERPATH}/cart`

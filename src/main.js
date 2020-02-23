@@ -12,6 +12,12 @@ Vue.use(ZoomOnHover);
 import BackToTop from "vue-backtotop";
 Vue.use(BackToTop);
 // backtotop
+// swiper
+import VueAwesomeSwiper from "vue-awesome-swiper";
+// require styles
+import "swiper/dist/css/swiper.css";
+// swiper
+Vue.use(VueAwesomeSwiper /* { default global options } */);
 // loading
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';

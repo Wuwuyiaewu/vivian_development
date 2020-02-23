@@ -2,7 +2,7 @@
   <div>
     <!-- <loading :active.sync="isLoading"></loading> -->
     <div class="container">
-      <div class="row">
+      <div class="row d-none d-sm-none d-md-block">
           <ul class="list col-12 pb-3">
               <li :class="{'active':pageone}">確認購物車</li>
               <li :class="{'active':pagetwo}">客戶資訊</li>

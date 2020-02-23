@@ -4,6 +4,7 @@
     <router-view class="animate pt-5" :class="{'push':cartfolder}"></router-view>
     <app-mask :cart='cartfolder'/>
     <app-cart :cart='cartfolder' :cartbag="cartbag"/>
+    
   </div>
 </template>
 

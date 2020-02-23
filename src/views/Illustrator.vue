@@ -17,9 +17,8 @@
                     <zoom-on-hover :img-normal="product.image" class="img-fluid zoom" :scale="1"></zoom-on-hover>
                 </div>
                 <div class="col-md-6 col-sm-12 p-3">
-                    <h6>畫名</h6>
-                    <p><strong>{{product.description}}</strong></p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi quos id sapiente consequatur? Quas cum possimus voluptates enim sapiente ex sequi nisi maxime a aliquid illo aperiam, tenetur esse alias magni voluptate magnam beatae! Eum, nesciunt veritatis porro earum vel in placeat fugit voluptate iste atque cum aut saepe quam.</p>
+                    <h6> <strong>- {{product.title}} - </strong></h6>
+                    <p>{{product.description}}</p>
                     <div class="row align-items-center">
                         <div class="col-6 text-center">
                             <p class="font-size">數量 -</p>
@@ -66,6 +65,10 @@
 }
 .font-size{
     font-size: 1.5rem;
+}
+.footer{
+    position: absolute;
+    bottom: 0;
 }
 .img-contain{
     display: flex;
