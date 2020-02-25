@@ -1,16 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Index from '../views/Index.vue'
-import Home from "../views/Home.vue";
-import Gallery from "../views/Gallery.vue";
-import Illustrator from "../views/Illustrator.vue"
-import Checkout from "../views/Checkout.vue"
-import Customorder from "../views/Customorder.vue";
-import Dashboard from "../views/admin/Dashboard.vue"
-import Coupon from "../views/admin/Coupon.vue";
-import Product from "../views/admin/Product.vue"
-import Order from "../views/admin/Order.vue"
-import Login from "../views/admin/Login.vue"
+import Index from "@/views/frontend/Index.vue";
+import Home from "@/views/frontend/Home.vue";
+import Gallery from "@/views/frontend/Gallery.vue";
+import Illustrator from "@/views/frontend/Illustrator.vue";
+import Checkout from "@/views/frontend/Checkout.vue";
+import Customorder from "@/views/frontend/Customorder.vue";
+import Dashboard from "@/views/backend/Dashboard.vue"
+import Coupon from "@/views/backend/Coupon.vue";
+import Product from "@/views/backend/Product.vue"
+import Order from "@/views/backend/Order.vue"
+import Login from "@/views/backend/Login.vue"
 Vue.use(VueRouter)
 
 const routes = [
@@ -47,11 +47,8 @@ const routes = [
       {
         path: "/about",
         name: "about",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () =>
-          import(/* webpackChunkName: "about" */ "../views/About.vue")
+          import("@/views/frontend/About.vue")
       }
     ]
   },

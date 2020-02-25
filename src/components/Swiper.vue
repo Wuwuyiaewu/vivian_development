@@ -1,26 +1,57 @@
 <template>
-    <swiper :options="swiperOption" ref="mySwiper" class="container">
-        <!-- slides -->
-            <swiper-slide class="swiper-slide">
-                <img src="../assets/pic/carrot_1.jpg" alt="" class="img-fluid">
-            </swiper-slide>
-            <swiper-slide class="swiper-slide">
-                <img src="../assets/pic/donut_2.jpg" alt="" class="img-fluid">
-            </swiper-slide>
-            <swiper-slide class="swiper-slide">
-                <img src="../assets/pic/Meringue_3.jpg" alt="" class="img-fluid">
-            </swiper-slide>
-            <swiper-slide class="swiper-slide">
-                <img src="../assets/pic/Cream_1.jpg" alt="" class="img-fluid">
-            </swiper-slide>
-            <swiper-slide class="swiper-slide">
-                <img src="../assets/pic/Mouse_2.jpg" alt="" class="img-fluid">
-            </swiper-slide>
-            <swiper-slide class="swiper-slide">
-                <img src="../assets/pic/Muffin_3.jpg" alt="" class="img-fluid">
-            </swiper-slide>
-            <div class="swiper-pagination" slot="pagination"></div>
-    </swiper>
+  <swiper
+    :options="swiperOption"
+    ref="mySwiper"
+    class="container"
+  >
+    <!-- slides -->
+    <swiper-slide class="swiper-slide">
+      <img
+        src="../assets/pic/carrot_1.jpg"
+        alt=""
+        class="img-fluid"
+      >
+    </swiper-slide>
+    <swiper-slide class="swiper-slide">
+      <img
+        src="../assets/pic/donut_2.jpg"
+        alt=""
+        class="img-fluid"
+      >
+    </swiper-slide>
+    <swiper-slide class="swiper-slide">
+      <img
+        src="../assets/pic/Meringue_3.jpg"
+        alt=""
+        class="img-fluid"
+      >
+    </swiper-slide>
+    <swiper-slide class="swiper-slide">
+      <img
+        src="../assets/pic/Cream_1.jpg"
+        alt=""
+        class="img-fluid"
+      >
+    </swiper-slide>
+    <swiper-slide class="swiper-slide">
+      <img
+        src="../assets/pic/Mouse_2.jpg"
+        alt=""
+        class="img-fluid"
+      >
+    </swiper-slide>
+    <swiper-slide class="swiper-slide">
+      <img
+        src="../assets/pic/Muffin_3.jpg"
+        alt=""
+        class="img-fluid"
+      >
+    </swiper-slide>
+    <div
+      class="swiper-pagination"
+      slot="pagination"
+    />
+  </swiper>
 </template>
 <style lang="scss">
 .fade-enter-active, .fade-leave-active {
@@ -36,7 +67,7 @@
 
 <script>
   export default {
-    name: 'carrousel',
+    name: 'Carrousel',
     data() {
       return {
         swiperOption: {

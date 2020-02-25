@@ -3,14 +3,21 @@
     <!-- <loading :active.sync="isLoading"></loading> -->
     <div class="container">
       <div class="row d-none d-sm-none d-md-block">
-          <ul class="list col-12 pb-3">
-              <li :class="{'active':pageone}">確認購物車</li>
-              <li :class="{'active':pagetwo}">客戶資訊</li>
-              <li >付款確認</li>
-          </ul>
+        <ul class="list col-12 pb-3">
+          <li :class="{'active':pageone}">
+            確認購物車
+          </li>
+          <li :class="{'active':pagetwo}">
+            客戶資訊
+          </li>
+          <li>付款確認</li>
+        </ul>
       </div>
       <div class="my-5 row justify-content-center">
-        <form class="col-12" @submit.prevent="payOrder">
+        <form
+          class="col-12"
+          @submit.prevent="payOrder"
+        >
           <table class="table">
             <thead>
               <th>品名</th>
@@ -18,16 +25,32 @@
               <th>單價</th>
             </thead>
             <tbody>
-              <tr v-for="item in order.products" :key="item.id">
-                <td class="align-middle">{{ item.product.title }}</td>
-                <td class="align-middle">{{ item.qty }}/{{ item.product.unit }}</td>
-                <td class="align-middle text-right">{{ item.total | currency}}</td>
+              <tr
+                v-for="item in order.products"
+                :key="item.id"
+              >
+                <td class="align-middle">
+                  {{ item.product.title }}
+                </td>
+                <td class="align-middle">
+                  {{ item.qty }}/{{ item.product.unit }}
+                </td>
+                <td class="align-middle text-right">
+                  {{ item.total | currency }}
+                </td>
               </tr>
             </tbody>
             <tfoot>
               <tr>
-                <td colspan="2" class="text-right">總計</td>
-                <td class="text-right">{{ order.total | currency}}</td>
+                <td
+                  colspan="2"
+                  class="text-right"
+                >
+                  總計
+                </td>
+                <td class="text-right">
+                  {{ order.total | currency }}
+                </td>
               </tr>
             </tfoot>
           </table>
@@ -35,7 +58,9 @@
           <table class="table">
             <tbody>
               <tr>
-                <th width="100">Email</th>
+                <th width="100">
+                  Email
+                </th>
                 <td>{{ order.user.email }}</td>
               </tr>
               <tr>
@@ -54,13 +79,21 @@
                 <th>付款狀態</th>
                 <td>
                   <span v-if="!order.is_paid">尚未付款</span>
-                  <span v-else class="text-success">付款完成</span>
+                  <span
+                    v-else
+                    class="text-success"
+                  >付款完成</span>
                 </td>
               </tr>
             </tbody>
           </table>
-          <div class="text-right" v-if="order.is_paid === false">
-            <button class="btn btn-danger">確認付款去</button>
+          <div
+            class="text-right"
+            v-if="order.is_paid === false"
+          >
+            <button class="btn btn-danger">
+              確認付款去
+            </button>
           </div>
         </form>
       </div>
@@ -83,7 +116,7 @@ export default {
       const vm = this;
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_USERPATH}/order/${vm.orderId}`;
       vm.isLoading = true;
-      this.$http.get(api).then(response => {
+      vm.$http.get(api).then(response => {
         vm.order = response.data.order;
         vm.isLoading = false;
       });
@@ -92,9 +125,9 @@ export default {
       const vm = this;
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_USERPATH}/pay/${vm.orderId}`;
       vm.isLoading = true;
-      this.$http.post(api).then(response => {
+      vm.$http.post(api).then(response => {
         if(response.data.success){
-            this.getOrder();
+            vm.getOrder();
         }
         vm.isLoading = false;
       });
