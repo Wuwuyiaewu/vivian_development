@@ -47,7 +47,13 @@
 
 <script>
 export default {
-  props: ["page"],
+  props: {
+    page:{
+      type: Object,
+      required: false,
+      default: () => []
+    }
+  },
   methods: {
     getPaginationProduct(page) {
       this.$emit("pagechange", page);
