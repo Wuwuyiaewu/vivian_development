@@ -66,17 +66,35 @@
         <div class="col-9">
           <div class="row">
             <div
-              class="col-xl-4 col-lg-6 mb-2"
+              class="col-xl-4 col-lg-6 mb-2 position-relative card-outer"
               v-for="item in DreamFilter"
               :key="item.id"
             >
+              <div
+                class="position-absolute fav-icon-wrap"
+                @click="getFavorId(item.id)"
+              >
+                <svg
+                  aria-hidden="true"
+                  focusable="false"
+                  data-prefix="fab"
+                  data-icon="gratipay"
+                  class="svg-inline--fa fa-gratipay fa-w-16 fav-icon"
+                  role="img"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 496 512"
+                ><path
+                  fill="currentColor"
+                  d="M248 8C111.1 8 0 119.1 0 256s111.1 248 248 248 248-111.1 248-248S384.9 8 248 8zm114.6 226.4l-113 152.7-112.7-152.7c-8.7-11.9-19.1-50.4 13.6-72 28.1-18.1 54.6-4.2 68.5 11.9 15.9 17.9 46.6 16.9 61.7 0 13.9-16.1 40.4-30 68.1-11.9 32.9 21.6 22.6 60 13.8 72z"
+                /></svg>
+              </div>
               <div class="card bg-dark text-white web-card">
                 <img
                   :src="item.image"
                   class="card-img"
                   alt="..."
                 >
-                <div class="card-img-overlay card-pt ">
+                <div class="card-img-overlay card-pt">
                   <div class="row ">
                     <div class="col-6 text-center">
                       <button
@@ -203,77 +221,6 @@
 </template>
 
 <style lang="scss" scoped>
-.card-img-overlay,.m_card-img-overlay{
-    overflow: hidden;
-    #addcart,#seedetail{
-        transition: transform 0.45s;
-        transform: translate(-100%,200%)
-    }
-    #seedetail{
-        transform: translate(100%,200%)
-    }
-    &:hover{
-        #addcart{
-            transform: translate(-10%,20%)
-        }
-        #seedetail{
-            transform: translate(10%,20%)
-        }
-    }
-}
-.web-card{
-    overflow: hidden;
-    .card-img{
-        transition-duration: 0.5s;
-        transition-property: transform;
-    }
-    &:hover{
-        .card-img{
-            transform: scale(1.2) rotate(5deg);
-            transition-duration: 8s;
-        }
-    }
-}
-.btn-to-top {
-    width: 50px;
-    height: 50px;
-    padding: 10px 16px;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    font-weight: 900;
-    line-height: 1rem;
-}
-@media (min-width: 768px) {
-    .card-img-overlay{
-        padding-top: 55%;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-    }
-}
-@media (min-width: 992px) {
-    .card-img-overlay{
-        padding-top: 55%;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-        .btn{
-            font-size: 16px;
-            padding: 8px;
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
-        }
-    }
-}
-@media (min-width: 1200px) {
-    .card-img-overlay{
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-        padding-top: 55%;
-        .btn{
-            font-size: 16px;
-            padding: 8px;
-        }
-    }
-}
 
 </style>
 
@@ -354,6 +301,10 @@ export default {
                     vm.$bus.$emit('message:push','加入失敗','warning');
                 }
             })
+        },
+        getFavorId(id){
+          this.$bus.$emit('wishPic',id)
+          console.log("已帶入ID為" + id + "的數值")
         }
     },
     created(){

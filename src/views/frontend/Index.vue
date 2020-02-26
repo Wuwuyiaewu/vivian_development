@@ -47,7 +47,7 @@ export default {
     return{
       cartshow:true,
       cartfolder:false,
-      cartbag:[]
+      cartbag:[],
     }
   },
   components: {
@@ -66,12 +66,12 @@ export default {
             vm.cartbag = res.data.data.carts
         })
     },
-    getCartLength(){
-    }
+    
   },
   created(){
-    this.$bus.$on('cartUpdate',()=>{
-      this.getCart()
+    const vm = this
+    vm.$bus.$on('cartUpdate',()=>{
+      vm.getCart()
     })
   }
 }

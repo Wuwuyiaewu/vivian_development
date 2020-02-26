@@ -111,6 +111,8 @@ export default {
       isLoading: false,
     };
   },
+  components:{
+  },
   methods: {
     getOrder() {
       const vm = this;

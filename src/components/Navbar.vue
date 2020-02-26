@@ -51,7 +51,7 @@
               to="/about"
               active-class="router-active"
             >
-              關於
+              收藏
             </router-link>
           </li>
           <li class="col-2" />

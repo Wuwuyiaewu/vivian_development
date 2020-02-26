@@ -4,6 +4,8 @@ import router from "./router";
 // alert
 import Alert from "./components/Alert.vue";
 Vue.component("Alert", Alert);
+import Favor from "./components/Favor.vue";
+Vue.component("Favor", Favor);
 // zoom
 import ZoomOnHover from "vue-zoom-on-hover";
 Vue.use(ZoomOnHover);

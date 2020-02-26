@@ -96,6 +96,7 @@
 }
 </style>
 <script>
+
 export default {
   props: {
     cart: {
@@ -106,6 +107,8 @@ export default {
       required: false,
       default: () => []
     }
+  },
+  components:{
   },
   data() {
     return {
@@ -119,6 +122,7 @@ export default {
       vm.axios.delete(url).then(res => {
         if (res.data.success) {
           vm.$bus.$emit("cartUpdate");
+          vm.$bus.$emit('message:push','刪除成功','secondary-dark');
         }
       });
     },

@@ -1,6 +1,6 @@
 <template>
   <div class="about bg-primary pt-5">
-    <div class="container">
+    <!-- <div class="container">
       <div class="card row flex-row p-5 d-none d-sm-none d-md-flex">
         <div class="col-xl-1 col-lg-1" />
         <div class="col-xl-5 col-lg-5">
@@ -128,7 +128,8 @@
           >
         </div>
       </div>
-    </div>
+    </div> -->
+    <Favor />
   </div>
 </template>
 
@@ -158,3 +159,13 @@
   }
 }
 </style>
+
+<script>
+export default {
+  data(){
+    return{}
+  },
+  components:{
+  }
+}
+</script>

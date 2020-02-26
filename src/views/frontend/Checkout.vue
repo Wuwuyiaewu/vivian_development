@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Alert />
     <div class="container pc d-none d-sm-none d-md-block position-relative">
       <div class="row">
         <ul class="list col-12 pb-3">
@@ -120,7 +121,7 @@
                   下一步
                 </button>
               </td>
-              <td v-if="cartbag.carts.length == 0">
+              <td v-if="cartbag.carts.length === 0">
                 <button
                   type="button"
                   class="btn btn-primary-dark w-100"
@@ -450,6 +451,7 @@
 </style>
 
 <script>
+import Alert from '@/components/Alert.vue'
 export default {
   data() {
     return {
@@ -470,6 +472,9 @@ export default {
       isLoading: false
     };
   },
+  components:{
+    Alert
+  },
   computed: {},
   methods: {
     removeCart(id) {
@@ -478,6 +483,7 @@ export default {
       vm.axios.delete(url).then(res => {
         if (res.data.success) {
           vm.getCart();
+          vm.$bus.$emit('message:push','刪除成功','secondary-dark');
         }
       });
     },
