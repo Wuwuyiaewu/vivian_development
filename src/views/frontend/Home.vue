@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div class="bg-right d-none d-sm-none d-md-block">
+    </div>
+    <div class="wave d-none d-sm-none d-md-block">
+    </div>
     <div class="home d-none d-sm-none d-md-block animate">
       <section class="mt-5">
         <div class="container">
@@ -25,7 +29,6 @@
         <div class="w-100" />
       </section>
       <Coupon />
-
       <!-- coupon -->
     </div>
     <div class="home d-sm-block d-md-none">
@@ -101,6 +104,13 @@
     </footer>
   </div>
 </template>
+<style lang="scss" scoped>
+.bg-right{
+  background-image:url('../../assets/pic/vivian.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+</style>
 
 <script>
 import Coupon from "@/components/Coupon";
@@ -113,6 +123,7 @@ export default {
   components: {
     Coupon
   },
-  methods: {}
+  methods: {
+  }
 };
 </script>
