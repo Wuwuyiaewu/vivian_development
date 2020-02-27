@@ -11,18 +11,18 @@
         width="72"
         height="72"
       >
-      <h1 class="h3 mb-3 font-weight-normal">
-        Please sign in
+      <h1 class="h3 mb-3 font-weight-normal text-center">
+        會員登入
       </h1>
       <label
         for="inputEmail"
         class="sr-only"
-      >Email address</label>
+      >輸入信箱</label>
       <input
         type="email"
         id="inputEmail"
         class="form-control"
-        placeholder="Email address"
+        placeholder="輸入信箱"
         required
         autofocus
         v-model="user.username"
@@ -30,12 +30,12 @@
       <label
         for="inputPassword"
         class="sr-only"
-      >Password</label>
+      >輸入密碼</label>
       <input
         type="password"
         id="inputPassword"
         class="form-control"
-        placeholder="Password"
+        placeholder="輸入密碼"
         required
         v-model="user.password"
       >
@@ -44,14 +44,14 @@
           <input
             type="checkbox"
             value="remember-me"
-          > Remember me
+          > <small>記住我</small>
         </label>
       </div>
       <button
         class="btn btn-lg btn-primary btn-block"
         type="submit"
       >
-        Sign in
+        登入
       </button>
     </form>
   </div>

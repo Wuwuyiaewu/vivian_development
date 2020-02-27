@@ -47,8 +47,12 @@ const routes = [
       {
         path: "/about",
         name: "about",
-        component: () =>
-          import("@/views/frontend/About.vue")
+        component: () => import("@/views/frontend/About.vue")
+      },
+      {
+        path: "/login",
+        name: "login",
+        component: Login
       }
     ]
   },
@@ -77,11 +81,6 @@ const routes = [
         meta: { requiredUser: true }
       }
     ]
-  },
-  {
-    path: "/login",
-    name: "login",
-    component: Login
   }
 ];
 const router = new VueRouter({

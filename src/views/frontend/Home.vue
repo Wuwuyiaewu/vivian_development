@@ -4,29 +4,31 @@
     </div>
     <div class="wave d-none d-sm-none d-md-block">
     </div>
-    <div class="home d-none d-sm-none d-md-block animate">
+    <div class="home d-none d-sm-none d-md-block">
       <section class="mt-5">
         <div class="container">
           <div class="row">
-            <div class="col-lg-5 col-md-4" />
             <div class="col-lg-3 col-sm-5 col-md-4">
               <p>shop anywhere</p>
             </div>
+            <div class="col-lg-1 col-sm-4 col-md-3"></div>
             <div class="col-lg-3 col-sm-5 col-md-4">
               get here
             </div>
             <div class="col-1 col-md-0" />
           </div>
           <div class="row">
-            <div class="col-sm-0 col-md-4 col-lg-5" />
-            <div class="col-sm-12 col-md-8 col-lg-7">
-              <h2>warming illustrator</h2>
+            <div class="col-sm-12 col-md-12 col-lg-9">
+              <h1>watercolor illustrator</h1>
+              <br>
+              <I>"It does not matter what material we use. We need the technique and we need the idea. And then we need the poetry, the love that transforms the material into a piece of art."</I>
+              <br>
+              <br>
+              <P>比起我們創作藝術時的材料。</P>
+              <P>更需要的是技術的潤滑、是創意塗抹、甚至需要詩歌的愛意，到了最後一刻，交融成藝術品。</P>
             </div>
           </div>
         </div>
-      </section>
-      <section class="w-100 home_bg_1">
-        <div class="w-100" />
       </section>
       <Coupon />
       <!-- coupon -->
@@ -106,7 +108,7 @@
 </template>
 <style lang="scss" scoped>
 .bg-right{
-  background-image:url('../../assets/pic/vivian.jpg');
+  background-image:url('../../assets/pic/background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
