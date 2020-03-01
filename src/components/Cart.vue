@@ -3,7 +3,7 @@
     class="navmenu bg-primary-light"
     :class="{'active':cart}"
   >
-    <div class="container">
+    <div class="container pt-5">
       <div
         class="row mt-3"
         v-for="item in cartbag"
@@ -79,7 +79,7 @@
 .navmenu {
   position: fixed;
   z-index: 999;
-  top: 91px;
+  top: 0px;
   left: 0px;
   width: 300px;
   height: 100%;

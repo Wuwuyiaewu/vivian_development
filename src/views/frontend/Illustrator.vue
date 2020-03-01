@@ -139,14 +139,24 @@
 <style lang="scss" scoped>
 .fa-angle-right,
 .fa-angle-left {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
 }
 .border {
   border: 2px solid #000 !important;
 }
 .font-size {
   font-size: 1.5rem;
+}
+@media (max-width: 768px) {
+  .font-size{
+   font-size: 1rem;
+  }
+  .fa-angle-right,
+  .fa-angle-left {
+    width: 30px;
+    height: 30px;
+  }
 }
 .footer {
   position: absolute;
@@ -163,7 +173,7 @@
   padding: 5px;
   border: 1px solid #000;
   border-radius: 4px;
-  width: 60px;
+  max-width: 60px;
   margin: 0 15px;
   text-align: center;
   font-size: 1rem;

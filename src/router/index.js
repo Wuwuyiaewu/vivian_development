@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Index from "@/views/frontend/Index.vue";
 import Home from "@/views/frontend/Home.vue";
 import Gallery from "@/views/frontend/Gallery.vue";
+import Favor from "@/views/frontend/Favor.vue"
 import Illustrator from "@/views/frontend/Illustrator.vue";
 import Checkout from "@/views/frontend/Checkout.vue";
 import Customorder from "@/views/frontend/Customorder.vue";
@@ -45,9 +46,9 @@ const routes = [
         component: Illustrator
       },
       {
-        path: "/about",
-        name: "about",
-        component: () => import("@/views/frontend/About.vue")
+        path: "/favor",
+        name: "favor",
+        component: Favor
       },
       {
         path: "/login",

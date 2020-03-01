@@ -48,7 +48,7 @@
           </li>
           <li class="col-2">
             <router-link
-              to="/about"
+              to="/favor"
               active-class="router-active"
             >
               收藏
@@ -107,11 +107,11 @@
     >
       <div class="list-group text-center">
         <router-link
-          to="/about"
+          to="/favor"
           class="list-group-item list-group-item-action bg-primary-light none-hover-class"
           @click.native="changeview"
         >
-          About
+          收藏
         </router-link>
         <router-link
           to="/gallery"
@@ -119,7 +119,7 @@
           class="list-group-item list-group-item-action bg-primary-light none-hover-class"
           @click.native="changeview"
         >
-          Shop
+          畫廊
         </router-link>
         <router-link
           to="/checkout"
@@ -127,7 +127,7 @@
           class="list-group-item list-group-item-action bg-primary-light none-hover-class"
           @click.native="changeview"
         >
-          Cart
+          購物車
           <span style="font-size:0.75rem;">({{ cartbag.length }})</span>
         </router-link>
       </div>

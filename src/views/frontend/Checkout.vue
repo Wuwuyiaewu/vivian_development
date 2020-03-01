@@ -255,6 +255,13 @@
     </div>
     <!-- 手機板 -->
     <div class="container mobile d-sm-block d-md-none">
+      <div class="row">
+        <div class="col-12">
+          <p v-if="cartbag.carts.length === 0">
+            購物車內還沒有商品唷
+          </p>
+        </div>
+      </div>
       <div
         class="row"
         v-for="item in cartbag.carts"
@@ -377,7 +384,6 @@
               <span class="text-danger">{{ errors[0] }}</span>
             </ValidationProvider>
           </div>
-
           <div class="form-group col-6">
             <label for="m_usertel">收件人電話 *</label>
             <ValidationProvider
@@ -395,7 +401,6 @@
               <span class="text-danger">{{ errors[0] }}</span>
             </ValidationProvider>
           </div>
-
           <div class="form-group col-6">
             <label for="m_useraddress">收件人地址 *</label>
             <ValidationProvider
@@ -414,7 +419,6 @@
               <span class="text-danger">{{ errors[0] }}</span>
             </ValidationProvider>
           </div>
-
           <div class="form-group col-12">
             <label for="m_comment">留言</label>
             <textarea

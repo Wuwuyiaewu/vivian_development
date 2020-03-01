@@ -126,7 +126,7 @@
                 type="text"
                 class="form-control"
                 id="couponText"
-                v-model="couponText"
+                v-model="couponText_discount"
               >
               <div class="input-group-append">
                 <button
@@ -161,7 +161,7 @@ export default {
   data() {
     return {
       typeEmail: "",
-      couponText: null,
+      couponText_discount: null,
       form: {
         user: {
           email: ""
@@ -188,7 +188,7 @@ export default {
   },
   methods: {
     emails() {
-      this.couponText = "Vivian_illustrator";
+      this.couponText_discount = "Vivian_illustrator";
     },
     copyTestingCode() {
       let testingCodeToCopy = document.querySelector("#couponText");

@@ -10,7 +10,7 @@
 .mask {
   position: fixed;
   z-index: 100;
-  top: 91px;
+  top: 0px;
   left: 0;
   width: 100%;
   height: 100%;
