@@ -140,7 +140,6 @@
               class="col-9"
               
             >
-              <!-- slides -->
               <swiper-slide
                 v-for="item in products"
                 :key="item.id"
@@ -152,62 +151,6 @@
                 >
                 <h6>{{item.title}}</h6>
               </swiper-slide>
-              <!-- <swiper-slide>
-            <img
-              src="../../assets/pic/donut_2.jpg"
-              alt
-              class="img-fluid"
-            >
-            <h6>甜甜圈</h6>
-          </swiper-slide>
-          <swiper-slide>
-            <img
-              src="../../assets/pic/eggroll_1.jpg"
-              alt
-              class="img-fluid"
-            >
-            <h6>蛋餅</h6>
-          </swiper-slide>
-          <swiper-slide>
-            <img
-              src="../../assets/pic/lovely_gradu_1.jpg"
-              alt
-              class="img-fluid"
-            >
-            <h6>畢業</h6>
-          </swiper-slide>
-          <swiper-slide>
-            <img
-              src="../../assets/pic/pipe_1.jpg"
-              alt
-              class="img-fluid"
-            >
-            <h6>樹莓派</h6>
-          </swiper-slide>
-          <swiper-slide>
-            <img
-              src="../../assets/pic/winecandy_1.jpg"
-              alt
-              class="img-fluid"
-            >
-            <h6>蜜酒糖</h6>
-          </swiper-slide>
-          <swiper-slide>
-            <img
-              src="../../assets/pic/carrot_3.jpg"
-              alt
-              class="img-fluid"
-            >
-            <h6>紅蘿蔔糕</h6>
-          </swiper-slide>
-          <swiper-slide>
-            <img
-              src="../../assets/pic/milktea_1.jpg"
-              alt
-              class="img-fluid"
-            >
-            <h6>奶茶</h6>
-          </swiper-slide> -->
             </swiper>
           </section>
         </div>
@@ -230,7 +173,7 @@
 }
 @media (max-width: 768px) {
   .font-size{
-   font-size: 1rem;
+    font-size: 1rem;
   }
   .fa-angle-right,
   .fa-angle-left {
