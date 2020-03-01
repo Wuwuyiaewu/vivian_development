@@ -37,7 +37,12 @@
           <div class="col-6 u-padding-8 mb-2">
             <div class="first_img">
               <div class="img_text">
-                <router-link to="/gallery" class="text-primary-dark">瀏覽水彩畫</router-link>
+                <router-link
+                  to="/gallery"
+                  class="text-primary-dark"
+                >
+                  瀏覽水彩畫
+                </router-link>
               </div>
             </div>
           </div>
@@ -72,12 +77,17 @@
           <div class="col-6 u-padding-8 mb-2">
             <div class="second_img ">
               <div class="img_text">
-                <router-link to="/favor" class="text-primary-dark">看看我的收藏</router-link>
+                <router-link
+                  to="/favor"
+                  class="text-primary-dark"
+                >
+                  看看我的收藏
+                </router-link>
               </div>
             </div>
           </div>
           <div class="col-6 u-padding-8 mb-2">
-            <div class="three_img"></div>
+            <div class="three_img" />
           </div>
           <div class="col-6 u-padding-8 mb-2">
             <img

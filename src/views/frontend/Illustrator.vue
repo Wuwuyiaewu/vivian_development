@@ -131,6 +131,86 @@
             </div>
           </div>
         </div>
+        <div class="col-12 mt-2">
+          <p>也許你會想看看...</p>
+          <section class=" row">
+            <swiper
+              :options="swiperOption"
+              ref="mySwiper"
+              class="col-9"
+              
+            >
+              <!-- slides -->
+              <swiper-slide
+                v-for="item in products"
+                :key="item.id"
+              >
+                <img
+                  :src="item.image"
+                  alt
+                  class="img-fluid"
+                >
+                <h6>{{item.title}}</h6>
+              </swiper-slide>
+              <!-- <swiper-slide>
+            <img
+              src="../../assets/pic/donut_2.jpg"
+              alt
+              class="img-fluid"
+            >
+            <h6>甜甜圈</h6>
+          </swiper-slide>
+          <swiper-slide>
+            <img
+              src="../../assets/pic/eggroll_1.jpg"
+              alt
+              class="img-fluid"
+            >
+            <h6>蛋餅</h6>
+          </swiper-slide>
+          <swiper-slide>
+            <img
+              src="../../assets/pic/lovely_gradu_1.jpg"
+              alt
+              class="img-fluid"
+            >
+            <h6>畢業</h6>
+          </swiper-slide>
+          <swiper-slide>
+            <img
+              src="../../assets/pic/pipe_1.jpg"
+              alt
+              class="img-fluid"
+            >
+            <h6>樹莓派</h6>
+          </swiper-slide>
+          <swiper-slide>
+            <img
+              src="../../assets/pic/winecandy_1.jpg"
+              alt
+              class="img-fluid"
+            >
+            <h6>蜜酒糖</h6>
+          </swiper-slide>
+          <swiper-slide>
+            <img
+              src="../../assets/pic/carrot_3.jpg"
+              alt
+              class="img-fluid"
+            >
+            <h6>紅蘿蔔糕</h6>
+          </swiper-slide>
+          <swiper-slide>
+            <img
+              src="../../assets/pic/milktea_1.jpg"
+              alt
+              class="img-fluid"
+            >
+            <h6>奶茶</h6>
+          </swiper-slide> -->
+            </swiper>
+          </section>
+        </div>
       </div>
     </div>
   </div>
@@ -189,6 +269,9 @@
   opacity: 0;
   visibility: hidden;
 }
+.swiper-container{
+  margin-left: 15px;
+}
 </style>
 
 <script>
@@ -196,10 +279,23 @@ export default {
   data() {
     return {
       product: [],
+      products:[],
       id: "",
       cart: [],
       productNum: 1,
-      isLoading: false
+      isLoading: false,
+      swiperOption: {
+        initialSlide: 0,
+        loop: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false
+        },
+        grabCursor: true,
+        slidesPerView: 4,
+        spaceBetween: 20
+      },
+      scrollbarHide:true,
     };
   },
   computed: {
@@ -209,6 +305,9 @@ export default {
       } else {
         return false;
       }
+    },
+    swiper() {
+      return this.$refs.mySwiper.swiper;
     }
   },
   methods: {
@@ -256,11 +355,25 @@ export default {
           vm.$router.push(`/checkout`);
         }
       });
-    }
+    },
+    typeProduct(){
+        const vm = this
+        const API = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_USERPATH}/products/all`
+        // 啟動loading
+        vm.axios.get(API).then(res=>{
+            vm.products = res.data.products
+            // 關閉loading
+
+        })
+    },
   },
   created() {
     this.idDetect();
     this.getCart();
+    this.typeProduct();
+  },
+  mounted() {
+    this.swiper.slideTo(3, 1000, false);
   }
 };
 </script>
