@@ -1,6 +1,6 @@
 # Vivian's illustrator
 > 歡迎來到水彩畫購物商城，這是一份 Vue.js 電商網站的前端練習作品 (Vue CLI 3)
-## :pencil1: Skills | 使用技術
+## :pencil2: Skills | 使用技術
 
 - Vue CLI 3
 - VueRouter
