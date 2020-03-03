@@ -16,7 +16,6 @@
       :cart="cartfolder"
       :cartbag="cartbag"
     />
-    
   </div>
 </template>
 

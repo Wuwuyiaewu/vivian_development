@@ -138,7 +138,6 @@
               :options="swiperOption"
               ref="mySwiper"
               class="col-9"
-              
             >
               <swiper-slide
                 v-for="item in products"
@@ -149,7 +148,7 @@
                   alt
                   class="img-fluid"
                 >
-                <h6>{{item.title}}</h6>
+                <h6>{{ item.title }}</h6>
               </swiper-slide>
             </swiper>
           </section>
