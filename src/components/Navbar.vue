@@ -1,11 +1,11 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-md bg-white">
+    <nav class="navbar navbar-expand-md ">
       <router-link
         to="/"
         class="navbar-brand col-4 none-hover-class"
       >
-        Vivian_illustrator
+        Vivian's illustrator
       </router-link>
       <button
         @click="clickshow = !clickshow"
@@ -57,7 +57,8 @@
           <li class="col-2" />
           <li class="col-1 position-relative">
             <button
-              class="border-0 bg-white"
+              class="border-0"
+              style="background:inherit;"
               @click="foldcart"
             >
               <svg
@@ -135,6 +136,10 @@
   </div>
 </template>
 <style lang="scss" scoped>
+.navbarAnimate{
+  padding: 5px 100px;
+  background: #fff;
+}
 .cartNum {
   position: absolute;
   display: flex;
@@ -152,6 +157,7 @@
 .navbar,
 .navbar-collapse {
   z-index: 999;
+  transition: 0.6s;
 }
 .fa-shopping-cart,
 .fa-bars,
@@ -210,6 +216,7 @@ export default {
   data() {
     return {
       screenWidth: document.body.clientWidth,
+      fullHeight: document.documentElement.clientHeight,
       rwdshow: Boolean,
       clickshow: false,
       cartshow: true
@@ -227,6 +234,10 @@ export default {
     }
   },
   mounted() {
+    window.addEventListener("scroll",function(){
+      let header = document.querySelector("nav");
+      header.classList.toggle("navbarAnimate",window.scrollY > 0)
+    })
     // 紀錄寬度
     const vm = this;
     window.onresize = () => {
@@ -249,14 +260,12 @@ export default {
         let vm = this;
         vm.timer = true;
         vm.screenWidth = val;
-        setTimeout(function() {
-          // 列印screenWidth變化的值
-          vm.timer = false;
-        }, 400);
         if (vm.screenWidth > 768) {
           vm.rwdshow = false;
+          vm.timer = false;
         } else {
           vm.rwdshow = true;
+          vm.timer = false;
         }
       }
     }

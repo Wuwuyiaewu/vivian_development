@@ -11,7 +11,13 @@
 
 body {
   position: relative;
+  .mt-100{
+    margin-top: auto;
+    margin-bottom: 0;
+  }
 }
+// page_Navbar
+
 // home
 .bg-right {
   position: fixed;

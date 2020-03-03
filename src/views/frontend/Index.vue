@@ -16,6 +16,7 @@
       :cart="cartfolder"
       :cartbag="cartbag"
     />
+    
   </div>
 </template>
 
@@ -66,6 +67,7 @@ export default {
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_USERPATH}/cart`;
       vm.axios.get(url).then(res => {
         vm.cartbag = res.data.data.carts;
+        console.log(res.data.data)
       });
     },
     wishSet(itemid) {

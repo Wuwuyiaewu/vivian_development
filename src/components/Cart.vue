@@ -28,7 +28,7 @@
           class="col-3"
           style="font-size:8px"
         >
-          <p>250 $</p>
+          <p>{{item.product.price * item.qty}} $</p>
         </div>
         <div class="col-2">
           <button
@@ -53,6 +53,7 @@
           </button>
         </div>
       </div>
+      <hr v-if="cartbag.length !== 0" style="border-top:3px solid #707070;">
       <div class="row mt-5">
         <div
           class="col-12"

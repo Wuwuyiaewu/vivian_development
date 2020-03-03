@@ -23,7 +23,7 @@
               <br>
               <br>
               <P>比起我們創作藝術時的材料。</P>
-              <P>更需要的是技術的潤滑、是創意塗抹、甚至需要詩歌的愛意，到了最後一刻，交融成藝術品。</P>
+              <P>更需要的是技術的潤滑、是創意塗抹、甚至需要詩歌的愛意，到了最後一刻，交融成為藝術品。</P>
             </div>
           </div>
         </div>
@@ -101,11 +101,10 @@
       <!-- coupon -->
       <Coupon />
     </div>
-    <footer class="footer mt-auto py-3 bg-primary-light">
+    <footer class="footer mt-100 py-3 bg-primary-light p-5">
       <div class="container">
-        <span class="text-muted">
-          @2020 CopyRight 本站僅作品練習，圖資來源為個人創作，如需使用請聯繫作者
-        </span>
+        <span class="text-muted">@2020 CopyRight
+          本站僅作品練習，圖資來源為個人創作，如需使用請聯繫作者</span>
       </div>
     </footer>
   </div>

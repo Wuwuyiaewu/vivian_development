@@ -229,12 +229,7 @@
         </div>
       </div>
     </div>
-    <footer class="footer mt-auto py-3 bg-primary-light">
-      <div class="container">
-        <span class="text-muted">@2020 CopyRight
-          本站僅作品練習，圖資來源為個人創作，如需使用請聯繫作者</span>
-      </div>
-    </footer>
+    
   </div>
 </template>
 
